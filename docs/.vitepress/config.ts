@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 import { resolve } from 'path'
 
 export default defineConfig({
+    base: '/yl-ui/',
     title: 'Yl-UI',
     description: 'Vue3 组件库',
     themeConfig: {
