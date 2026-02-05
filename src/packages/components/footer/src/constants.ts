@@ -1,0 +1,1 @@
+export const FOOTER_DEFAULT_PROPS = {} as const

@@ -1,0 +1,70 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(link) {
+
+    --#{$prefix}-link-text-color: var(--#{$prefix}-text-color-regular);
+    --#{$prefix}-link-underline-color: var(--#{$prefix}-text-color-regular);
+    --#{$prefix}-link-hover-text-color: var(--#{$prefix}-color-primary-light-3);
+    --#{$prefix}-link-hover-underline-color: var(--#{$prefix}-color-primary-light-3);
+    --#{$prefix}-link-disabled-text-color: var(--#{$prefix}-disabled-text-color);
+
+    color: getCssVar(link-text-color);
+    text-decoration: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    text-underline-offset: 4px;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    position: relative;
+
+    &:hover {
+        color: getCssVar(link-hover-text-color);
+    }
+
+    &:hover::after,
+    &.is-always:hover:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid getCssVar(link-hover-underline-color);
+    }
+
+    &.is-disabled {
+        color: getCssVar(link-disabled-text-color);
+        cursor: not-allowed;
+        --#{$prefix}-link-hover-underline-color: transparent;
+    }
+
+    &.is-always::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid getCssVar(link-underline-color);
+    }
+
+    &.is-never {
+        --#{$prefix}-link-hover-underline-color: transparent;
+    }
+
+    @each $type in primary, success, warning, danger, info {
+        @include m($type) {
+            --#{$prefix}-link-text-color: var(--#{$prefix}-color-#{$type});
+            --#{$prefix}-link-underline-color: var(--#{$prefix}-color-#{$type});
+            --#{$prefix}-link-hover-text-color: var(--#{$prefix}-color-#{$type}-light-3);
+            --#{$prefix}-link-hover-underline-color: var(--#{$prefix}-color-#{$type}-light-3);
+            --#{$prefix}-link-disabled-text-color: var(--#{$prefix}-color-#{$type}-light-5);
+
+            &.is-never {
+                --#{$prefix}-link-hover-underline-color: transparent;
+            }
+        }
+    }
+}

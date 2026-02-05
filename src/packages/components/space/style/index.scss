@@ -1,0 +1,24 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(space) {
+    display: inline-flex;
+    vertical-align: top;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+
+    &.is-wrap {
+        flex-wrap: wrap;
+    }
+
+    @include m(vertical) {
+        flex-direction: column;
+    }
+
+    @include e(spacer) {
+        line-height: 1.2;
+    }
+}

@@ -1,0 +1,14 @@
+@use 'mixin/bem.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(container) {
+    display: flex;
+    flex: 1;
+    flex-shrink: 0;
+    flex-basis: auto;
+
+
+    &.is-vertical {
+        flex-direction: column;
+    }
+}

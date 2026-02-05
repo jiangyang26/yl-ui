@@ -1,0 +1,22 @@
+@use './../common/config.scss' as *;
+
+// ===== 块 =====
+@mixin b($block) {
+  .#{$prefix}-#{$block} {
+    @content;
+  }
+}
+
+// ===== 元素 =====
+@mixin e($element) {
+  &__#{$element} {
+    @content;
+  }
+}
+
+// ===== 修饰符 =====
+@mixin m($modifier) {
+  &--#{$modifier} {
+    @content;
+  }
+}

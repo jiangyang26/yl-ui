@@ -1,0 +1,9 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(aside) {
+    --#{prefix}-aside-width: 200px;
+
+    width: 200px;
+}

@@ -1,0 +1,38 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(text) {
+    --#{$prefix}-text-color: var(--#{$prefix}-color-regular);
+    --#{$prefix}-text-size: var(--#{$prefix}-font-size-base);
+
+    color: getCssVar(text-color);
+    font-size: getCssVar(text-size);
+    overflow-wrap: break-word;
+
+    &.is-truncated {
+        display: inline-block;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &.is-line-clamp {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    @each $size in small, large {
+        @include m($size) {
+            --#{$prefix}-text-size: var(--#{$prefix}-font-size-#{$size});
+        }
+    }
+
+    @each $type in primary, success, warning, danger, info {
+        @include m($type) {
+            --#{$prefix}-text-color: var(--#{$prefix}-color-#{$type});
+        }
+    }
+}

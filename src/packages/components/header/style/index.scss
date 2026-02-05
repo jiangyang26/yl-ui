@@ -1,0 +1,11 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b('header') {
+    --#{$prefix}-header-height: 60px;
+
+    height: getCssVar(header-height);
+    box-sizing: border-box;
+    flex-shrink: 0;
+}

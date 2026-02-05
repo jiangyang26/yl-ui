@@ -1,0 +1,6 @@
+@use './../common/config.scss' as *;
+
+// 获取 css 变量
+@function getCssVar($var) {
+  @return var(--#{$prefix}-#{$var});
+}

@@ -1,0 +1,17 @@
+@use 'sass:math';
+@use 'mixin/bem.scss' as *;
+
+@include b(col) {
+    min-height: 36px;
+    flex-grow: 1;
+    padding-inline: 10px;
+    box-sizing: border-box;
+    $column: 24;
+
+    @for $span from 1 through $column {
+        &-#{$span} {
+            flex: 1 0 calc((#{(math.div($span, $column)) * 100%}));
+            max-width: calc((#{(math.div($span, $column)) * 100%}));
+        }
+    }
+}

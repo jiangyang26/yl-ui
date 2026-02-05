@@ -1,0 +1,74 @@
+@use 'mixin/bem.scss' as *;
+@use 'mixin/function.scss' as *;
+@use 'common/config.scss' as *;
+
+@include b(scrollbar) {
+
+    --#{$prefix}-scrollbar-opacity: .3;
+    --#{$prefix}-scrollbar-bg-color: var(--#{$prefix}-text-color-secondary);
+    --#{$prefix}-scrollbar-hover-opacity: .5;
+    --#{$prefix}-scrollbar-hover-bg-color: var(--#{$prefix}-text-color-secondary);
+
+    height: inherit;
+    position: relative;
+
+    @include e(wrap) {
+        overflow: auto;
+        scrollbar-width: none;
+        height: inherit;
+    }
+
+    @include e(view) {}
+
+    @include e(bar) {
+        position: absolute;
+
+        &.is-vertical {
+            top: 0;
+            right: 0;
+            width: 6px;
+            height: 100%;
+        }
+
+        &.is-horizontal {
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            width: 100%;
+        }
+    }
+
+    @include e(thumb) {
+        opacity: getCssVar(scrollbar-opacity);
+        background-color: getCssVar(scrollbar-bg-color);
+        border-radius: 4px;
+        cursor: pointer;
+        width: inherit;
+        height: inherit;
+
+        &:hover {
+            opacity: getCssVar(scrollbar-hover-opacity);
+            background-color: getCssVar(scrollbar-hover-bg-color);
+        }
+    }
+
+    /* 进入的起始状态 */
+    .#{$prefix}-scrollbar-fade-enter-from {
+        opacity: 0;
+    }
+
+    /* 进入的过渡曲线 */
+    .#{$prefix}-scrollbar-fade-enter-active {
+        transition: opacity 0.2s ease;
+    }
+
+    /* 离开的最终状态 */
+    .#{$prefix}-scrollbar-fade-leave-to {
+        opacity: 0;
+    }
+
+    /* 离开的过渡曲线 */
+    .#{$prefix}-scrollbar-fade-leave-active {
+        transition: opacity 0.2s ease;
+    }
+}
