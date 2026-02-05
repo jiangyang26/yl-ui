@@ -1,7 +1,10 @@
-name: CI
+name: CI - Type Check
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -9,19 +12,22 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
           run_install: true
 
-      - name: Use Node.js LTS
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-          registry-url: https://registry.npmjs.org/
-          cache: pnpm
+          node-version: '20'
+          cache: 'pnpm'
 
-      - name: Type Check
-        run: npm run typecheck
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Type Check
+        run: pnpm run typecheck
