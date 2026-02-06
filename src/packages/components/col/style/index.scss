@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use 'mixin/bem.scss' as *;
+
 
 @include b(col) {
     min-height: 36px;

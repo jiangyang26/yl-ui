@@ -1,9 +1,3 @@
-@use 'mixin/function.scss' as *;
-@use 'mixin/bem.scss' as *;
-@use 'common/config.scss' as *;
-
-
-
 @include b('button') {
 
     --#{$prefix}-button-bg-color: var(--#{$prefix}-color-white);

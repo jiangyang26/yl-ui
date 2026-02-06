@@ -1,5 +1,4 @@
 @forward './base.scss';
-@forward './common/index.scss';
-@forward './mixin/index.scss';
+@forward './additional.scss';
 
 @use './common/var.scss' as *;

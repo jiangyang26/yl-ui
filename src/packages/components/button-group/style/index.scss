@@ -1,6 +1,3 @@
-@use 'mixin/bem.scss' as *;
-@use 'common/config.scss' as *;
-
 @include b(button-group) {
     display: flex;
     gap: 1px;

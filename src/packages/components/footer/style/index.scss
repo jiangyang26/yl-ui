@@ -1,7 +1,3 @@
-@use 'mixin/bem.scss' as *;
-@use 'mixin/function.scss' as *;
-@use 'common/config.scss' as *;
-
 @include b(footer) {
     --#{$prefix}-footer-height: 60px;
 

@@ -13,10 +13,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // -> 每个 scss 文件都会插入这段文本
-        // additionalData: `@use "theme-chalk/src/index.scss" as *;`,
-        // -> 相对 loadPaths 的路径
-        loadPaths: [path.resolve(__dirname, 'src/packages/theme-chalk/src')]
+        additionalData: `@use "@/theme-chalk/src/additional.scss" as *;`,
       },
     },
   },
