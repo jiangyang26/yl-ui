@@ -1,0 +1,77 @@
+:root {
+    --vp-c-brand: #409eff;
+    --vp-c-brand-light: #53a8ff;
+    --vp-c-brand-lighter: #79bbff;
+    --vp-c-brand-dark: #3375b9;
+    --vp-c-brand-darker: #2b5aa0;
+}
+
+/* 自定义 Element Plus 样式 */
+.el-button {
+    margin: 8px;
+}
+
+/* 代码块样式 */
+.vp-doc pre {
+    background-color: #f6f8fa;
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.vp-doc code {
+    background-color: #f6f8fa;
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+/* API 表格样式 */
+.api-table {
+    margin: 16px 0;
+}
+
+.api-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.api-table th,
+.api-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ebeef5;
+}
+
+.api-table th {
+    background-color: #f5f7fa;
+    font-weight: 600;
+}
+
+/* 示例查看器样式 */
+.example-viewer {
+    border: 1px solid #ebeef5;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.example-demo {
+    padding: 24px;
+}
+
+.example-code {
+    background-color: #f6f8fa;
+    padding: 16px;
+    border-top: 1px solid #ebeef5;
+}
+
+/* 版本标签 */
+.version-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    margin-left: 4px;
+    font-size: 12px;
+    color: #fff;
+    background-color: #409eff;
+    border-radius: 3px;
+}

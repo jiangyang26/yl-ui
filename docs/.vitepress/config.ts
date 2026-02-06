@@ -60,14 +60,21 @@ export default defineConfig({
             ]
         },
         socialLinks: [
-            { icon: 'github', link: '' }
+            { icon: 'github', link: 'https://github.com/jiangyang26/yl-ui' }
         ]
     },
     vite: {
         resolve: {
             alias: {
-                '@': resolve(__dirname, 'src/packages')
+                '@': resolve(__dirname, '../../src/packages')
             }
-        }
+        },
+        css: {
+            preprocessorOptions: {
+                scss: {
+                    additionalData: `@use "@/theme-chalk/src/additional.scss" as *;`
+                },
+            },
+        },
     }
 })

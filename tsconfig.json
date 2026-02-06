@@ -36,6 +36,7 @@
     "src/**/*.scss",
     "play/**/*",
     "docs/**/*",
+    "docs/.vitepress/**/*",
     "auto-imports.d.ts",
     "components.d.ts"
   ]

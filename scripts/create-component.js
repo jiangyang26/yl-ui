@@ -66,7 +66,7 @@ export const ${toUpperSnake(name)}_DEFAULT_PROPS = {
 
     /* ---- 样式 ---- */
     'style/index.scss': (name) => `
-@use 'mixin/bem.scss' as *;
+
 @use 'mixin/function' as *;
 @use 'common/config' as *;
 

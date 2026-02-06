@@ -32,16 +32,6 @@
             <yl-button circle type="danger" :icon="Delete"></yl-button>
         </div>
 
-        <!-- 自定义颜色
-        <div>
-            <yl-button color="red">Default</yl-button>
-            <yl-button color="#777">Default</yl-button>
-            <yl-button color="rgb(7, 3, 100)">Default</yl-button>
-            <yl-button color="yellow">Default</yl-button>
-            <yl-button color="pink">Default</yl-button>
-            <yl-button color="#999">Default</yl-button>
-        </div> -->
-
         禁用状态
         <div>
             <yl-button disabled>Default</yl-button>
