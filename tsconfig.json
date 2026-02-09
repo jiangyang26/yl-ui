@@ -36,6 +36,8 @@
     "src/**/*.scss",
     "play/**/*",
     "docs/**/*",
+    "docs/**/*.vue",
+    "docs/**/*.ts",
     "docs/.vitepress/**/*",
     "auto-imports.d.ts",
     "components.d.ts"

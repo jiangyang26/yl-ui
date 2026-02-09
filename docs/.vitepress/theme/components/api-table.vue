@@ -11,24 +11,27 @@
             <tbody>
                 <tr v-for="(row, index) in data" :key="index">
                     <td v-for="column in columns" :key="column.prop">
-                        <template v-if="column.prop === 'name'">
-                            <!-- <code>{{ row[column.prop] }}</code> -->
-                            <span>{{ row[column.prop] }}</span>
-                            <!-- <VersionTag v-if="row.version" :version="row.version" /> -->
-                        </template>
-                        <template v-else-if="column.prop === 'type'">
+                        <!-- <template> -->
+                        <!-- <code>{{ row[column.prop] }}</code> -->
+                        <span>{{ row[column.prop] }}</span>
+                        <!-- <VersionTag v-if="row.version" :version="row.version" /> -->
+                        <!-- </template> -->
+                        <!-- <template v-else-if="column.prop === 'type'">
                             <span>{{ row[column.prop] }}</span>
                         </template>
                         <template v-else-if="column.prop === 'value'">
                             <template v-if="row[column.prop]">
-                                <span v-for="value in row[column.prop]" :key="value">
+                                <span
+                                    v-for="value in row[column.prop]"
+                                    :key="value"
+                                >
                                     {{ value }}
                                 </span>
                             </template>
                         </template>
                         <template v-else>
                             {{ row[column.prop] }}
-                        </template>
+                        </template> -->
                     </td>
                 </tr>
             </tbody>
@@ -37,54 +40,53 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed } from "vue";
 
 const props = defineProps({
     data: {
         type: Array,
-        required: true
+        required: true,
     },
     type: {
         type: String,
-        default: 'attributes' // attributes, slots, exposes, events
-    }
-})
+        default: "attributes", // attributes, slots, exposes, events
+    },
+});
 
 const columns = computed(() => {
     switch (props.type) {
-        case 'attributes':
+        case "attributes":
             return [
-                { prop: 'name', label: 'Name' },
-                { prop: 'description', label: 'Description' },
-                { prop: 'type', label: 'Type' },
-                { prop: 'default', label: 'Default' },
-                { prop: 'value', label: 'Accepted Values' }
-            ]
-        case 'slots':
+                { prop: "name", label: "属性名" },
+                { prop: "description", label: "说明" },
+                { prop: "type", label: "类型" },
+                { prop: "default", label: "默认值" },
+            ];
+        case "slots":
             return [
-                { prop: 'name', label: 'Name' },
-                { prop: 'description', label: 'Description' },
-                // { prop: 'subtags', label: 'Subtags' }
-            ]
-        case 'exposes':
+                { prop: "name", label: "插槽名" },
+                { prop: "description", label: "说明" },
+                { prop: "subtag", label: "子标签" },
+            ];
+        case "exposes":
             return [
-                { prop: 'name', label: 'Name' },
-                { prop: 'description', label: 'Description' },
-                { prop: 'type', label: 'Type' }
-            ]
-        case 'events':
+                { prop: "name", label: "名称" },
+                { prop: "description", label: "说明" },
+                { prop: "type", label: "类型" },
+            ];
+        case "events":
             return [
-                { prop: 'name', label: 'Event Name' },
-                { prop: 'description', label: 'Description' },
-                { prop: 'parameters', label: 'Parameters' }
-            ]
+                { prop: "name", label: "事件名" },
+                { prop: "description", label: "说明" },
+                { prop: "parameter", label: "参数" },
+            ];
         default:
-            return Object.keys(props.data[0] || {}).map(key => ({
+            return Object.keys(props.data[0] || {}).map((key) => ({
                 prop: key,
-                label: key.charAt(0).toUpperCase() + key.slice(1)
-            }))
+                label: key.charAt(0).toUpperCase() + key.slice(1),
+            }));
     }
-})
+});
 </script>
 
 <style scoped>

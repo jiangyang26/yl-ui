@@ -6,7 +6,7 @@
                 {{ copied ? '已复制' : '复制代码' }}
             </button>
         </div> -->
-        <pre><code :class="`language-${language}`">{{ code }}</code></pre>
+        <div v-html="code"></div>
     </div>
 </template>
 
@@ -17,10 +17,6 @@ const props = defineProps({
     code: {
         type: String,
         required: true
-    },
-    language: {
-        type: String,
-        default: 'vue'
     }
 })
 
@@ -39,12 +35,19 @@ const copyCode = async () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .code-block {
     margin: 16px 0;
     border: 1px solid var(--vp-c-divider);
     border-radius: 8px;
     overflow: hidden;
+
+    :deep(.shiki) {
+        background: none !important;
+        >code {
+            background: none;
+        }
+    }
 }
 
 .code-header {

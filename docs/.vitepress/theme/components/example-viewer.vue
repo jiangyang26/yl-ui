@@ -16,62 +16,93 @@
                         <path fill="currentColor"
                             d="M9.3 15.5L7.2 13.4L9.3 11.3L8.5 10.5L5 14L8.5 17.5L9.3 16.7M14.7 15.5L16.8 13.4L14.7 11.3L15.5 10.5L19 14L15.5 17.5L14.7 16.7M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2Z" />
                     </svg> -->
-                    {{ showCode ? '隐藏代码' : '显示代码' }}
+                    {{ showCode ? "隐藏代码" : "显示代码" }}
                 </button>
             </div>
             <div v-show="showCode" class="example-code-wrapper">
-                <CodeBlock :code="sourceCode" :language="language" />
+                <CodeBlock :code="sourceCode" />
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref, computed, defineAsyncComponent } from 'vue'
-import CodeBlock from './code-block.vue'
+import { ref, computed, defineAsyncComponent, onMounted, watch } from "vue";
+import CodeBlock from "./code-block.vue";
+import { createHighlighter } from "shiki";
+import { useData } from "vitepress";
 
 const props = defineProps({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     case: {
         type: String,
-        default: ''
+        default: "",
     },
     description: {
         type: String,
-        default: ''
+        default: "",
     },
-    language: {
+    lang: {
         type: String,
-        default: 'vue'
-    }
-})
+        default: "vue",
+    },
+});
 
-const showCode = ref(false)
-const sourceCode = ref('')
+const showCode = ref(false);
+const sourceCode = ref("");
+const { isDark } = useData();
 
 const exampleComponent = computed(() => {
     try {
-        return defineAsyncComponent(() => import(`../../../examples/${props.name}/${props.case}.vue`))
+        return defineAsyncComponent(
+            () => import(`../../../examples/${props.name}/${props.case}.vue`),
+        );
     } catch (error) {
-        console.error('Failed to load example:', error)
-        return null
+        console.error("Failed to load example:", error);
+        return null;
     }
-})
+});
 
-const toggleCode = async () => {
-    showCode.value = !showCode.value
-    if (showCode.value && !sourceCode.value) {
-        try {
-            const response = await fetch(`../examples/${props.name}/${props.case}.vue`)
-            sourceCode.value = await response.text()
-        } catch (error) {
-            console.error('Failed to load source code:', error)
-        }
+let highlighter = null;
+
+const highlightCode = async () => {
+    try {
+        const module = await import(
+            `../../../examples/${props.name}/${props.case}.vue?raw`
+        );
+        sourceCode.value = highlighter.codeToHtml(module.default, {
+            lang: props.lang,
+            theme: isDark.value ? "github-dark" : "github-light",
+        });
+    } catch (error) {
+        console.error("Failed to load source code:", error);
     }
-}
+};
+
+const toggleCode = () => {
+    showCode.value = !showCode.value;
+    if (showCode.value && !sourceCode.value) {
+        highlightCode();
+    }
+};
+
+watch(isDark, () => {
+    highlightCode();
+});
+
+onMounted(async () => {
+    try {
+        highlighter = await createHighlighter({
+            themes: ["github-light", "github-dark"],
+            langs: ["javascript", "typescript", "vue", "css"],
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
 </script>
 
 <style lang="scss" scoped>
