@@ -66,7 +66,7 @@ const columns = computed(() => {
             return [
                 { prop: "name", label: "插槽名" },
                 { prop: "description", label: "说明" },
-                { prop: "subtag", label: "子标签" },
+                { prop: "subTag", label: "子标签" },
             ];
         case "exposes":
             return [
