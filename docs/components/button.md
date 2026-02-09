@@ -11,7 +11,7 @@ import case7 from '../examples/button/case7.vue'
 
 const attributes = ref([
   { name: 'size', description: '尺寸', type: 'enum', default: '—' },
-  { name: 'type', description: '按钮类型，在设置color时，后者优先。', type: 'enum', default: '—' },
+  { name: 'type', description: '按钮类型', type: 'enum', default: '—' },
   { name: 'plain', description: '是否为朴素按钮', type: 'boolean', default: 'false' },
   { name: 'text', description: '是否为文字按钮', type: 'boolean', default: 'false' },
   { name: 'bg', description: '是否显示文字按钮背景颜色', type: 'boolean', default: 'false' },
