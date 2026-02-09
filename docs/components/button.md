@@ -23,7 +23,6 @@ const attributes = ref([
   { name: 'icon', description: '图标组件', type: 'string / Component', default: '—' },
   { name: 'autofocus', description: '原生 autofocus 属性', type: 'boolean', default: 'false' },
   { name: 'native-type', description: '原生 type 属性', type: 'enum', default: 'button' },
-  { name: 'color', description: '自定义按钮颜色, 并自动计算 hover 和 active 触发后的颜色', type: 'string', default: '—' },
   { name: 'tag', description: '自定义元素标签', type: 'string / Component', default: 'button' }
 ])
 
