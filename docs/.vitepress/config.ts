@@ -31,6 +31,7 @@ export default defineConfig({
                             link: "/components/container",
                         },
                         { text: "Icon 图标", link: "/components/icon" },
+                        { text: "Layout 布局", link: "/components/layout" },
                         { text: "Link 链接", link: "/components/link" },
                         { text: "Text 文本", link: "/components/text" },
                     ],
