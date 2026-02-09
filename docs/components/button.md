@@ -31,9 +31,9 @@ const attributes = ref([
 // ])
 
 const slots = ref([
-  { name: 'default', description: '自定义默认内容', subtag: '—' },
-  { name: 'loading', description: '自定义加载中组件', subtag: '—' },
-  { name: 'icon', description: '自定义图标组件', subtag: '—'}
+  { name: 'default', description: '自定义默认内容', subTag: '—' },
+  { name: 'loading', description: '自定义加载中组件', subTag: '—' },
+  { name: 'icon', description: '自定义图标组件', subTag: '—'}
 ])
 
 // const exposes = ref([
