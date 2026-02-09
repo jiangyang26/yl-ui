@@ -120,7 +120,7 @@ ${examples}
 <ApiTable :data="events" type="events" />
 
 ### Slots
-<ApiTable :data="slots"  type="slots" />
+<ApiTable :data="slots"  type="slots" subTag="" />
 
 ### Exposes
 <ApiTable :data="exposes" type="exposes" />
