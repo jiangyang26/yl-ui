@@ -121,7 +121,7 @@ onMounted(async () => {
     // display: flex;
     // align-items: center;
     // justify-content: center;
-    min-height: 60px;
+    // min-height: 60px;
 }
 
 .example-divider {
