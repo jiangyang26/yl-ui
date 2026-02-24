@@ -24,7 +24,7 @@ const events = ref([
 ])
 
 const slots = ref([
-  { name: 'default', description: '自定义默认内容' }
+  { name: 'default', description: '自定义默认内容', subTag: '—' }
 ])
 
 const exposes = ref([
