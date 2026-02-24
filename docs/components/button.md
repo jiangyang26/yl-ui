@@ -26,22 +26,11 @@ const attributes = ref([
   { name: 'tag', description: '自定义元素标签', type: 'string / Component', default: 'button' }
 ])
 
-// const events = ref([
-//     {name: '', description: '', parameter: ''}
-// ])
-
 const slots = ref([
   { name: 'default', description: '自定义默认内容', subTag: '—' },
   { name: 'loading', description: '自定义加载中组件', subTag: '—' },
   { name: 'icon', description: '自定义图标组件', subTag: '—'}
 ])
-
-// const exposes = ref([
-//   { name: 'ref', description: '按钮 html 元素', type: 'object' },
-//   { name: 'size', description: '按钮尺寸', type: 'object' },
-//   { name: 'type', description: '按钮类型', type: 'object' },
-//   { name: 'disabled', description: '按钮已禁用', type: 'object' },
-// ])
 </script>
 
 # Button

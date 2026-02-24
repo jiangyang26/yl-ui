@@ -370,7 +370,14 @@ const handleBarMove = (e: MouseEvent) => {
     if (barType === BAR_TYPE.VERTICAL) {
         let transform = e.clientY - mousePosition.y + barTransform.y
 
+        if (transform < 0) {
+            barScroll(0)
+            wrapScroll(0)
+            return
+        }
+
         if (transform > (wrapHeight.value - barHeight)) {
+            barScroll(wrapHeight.value - barHeight)
             wrapScroll(wrapScrollHeight.value - wrapHeight.value)
             return
         }
@@ -380,7 +387,14 @@ const handleBarMove = (e: MouseEvent) => {
     } else if (barType === BAR_TYPE.HORIZONTAL) {
         let transform = e.clientX - mousePosition.x + barTransform.x
 
+        if (transform < 0) {
+            barScroll(0)
+            wrapScroll(0)
+            return
+        }
+
         if (transform > (wrapWidth.value - barWidth)) {
+            barScroll(wrapWidth.value - barWidth)
             wrapScroll(wrapScrollWidth.value - wrapWidth.value)
             return
         }
@@ -395,11 +409,11 @@ const scrollFn = () => {
     wrapRef.value?.scrollTo(0, wrapRef.value.scrollTop - 1)
 }
 
-const scrollTo = (x: number = 0, y: number = 0) => {
-    if (!wrapRef.value || !isNumeric(x) || !isNumeric(y)) {
+const scrollTo = (scrollLeft: number = 0, scrollTop: number = 0) => {
+    if (!wrapRef.value || !isNumeric(scrollLeft) || !isNumeric(scrollTop)) {
         return
     }
-    wrapRef.value.scrollTo(x, y)
+    wrapRef.value.scrollTo(scrollLeft, scrollTop)
     update()
 }
 

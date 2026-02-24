@@ -78,7 +78,7 @@ const columns = computed(() => {
             return [
                 { prop: "name", label: "事件名" },
                 { prop: "description", label: "说明" },
-                { prop: "parameter", label: "参数" },
+                { prop: "type", label: "参数" },
             ];
         default:
             return Object.keys(props.data[0] || {}).map((key) => ({
