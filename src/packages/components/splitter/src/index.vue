@@ -5,16 +5,30 @@
                 <div :class="ns.e('view')">
                     <component :is="node" :ref="setPanelRef"></component>
                 </div>
-                <div :class="[ns.e('bar'), ns.is('disabled', !resizable)]" @mousedown="handleMouseDown($event, index)"
-                    v-if="index !== nodes.length - 1">
+                <div @click.stop :class="[ns.e('bar'), ns.is('disabled', !resizable)]"
+                    @mousedown="handleMouseDown($event, index)" v-if="index !== nodes.length - 1">
                     <div v-if="showIconStart(index)" @click="handleCollapsibleStart(index)" @mousedown.stop
                         :class="[ns.e('bar--collapse-icon'), ns.e('bar--collapse-icon-start')]">
-                        <Icon :name="isVertical ? 'arrow-up' : 'arrow-left'" size="12" />
+
+                        <template
+                            v-if="typeof node.children === 'object' && node.children && (node.children as any).startCollapsible">
+                            <component v-for="n in (node.children as any).startCollapsible?.() ?? []" :is="n">
+                            </component>
+                        </template>
+
+                        <Icon v-else :name="isVertical ? 'arrow-up' : 'arrow-left'" size="12" />
                     </div>
                     <div v-if="index !== nodes.length - 1" :class="ns.e('bar--dragger')"></div>
                     <div v-if="showIconEnd(index)" @click="handleCollapsibleEnd(index)" @mousedown.stop
                         :class="[ns.e('bar--collapse-icon'), ns.e('bar--collapse-icon-end')]">
-                        <Icon :name="isVertical ? 'arrow-down' : 'arrow-right'" size="12" />
+
+                        <template
+                            v-if="typeof node.children === 'object' && node.children && (node.children as any).endCollapsible">
+                            <component v-for="n in (node.children as any).endCollapsible?.() ?? []" :is="n">
+                            </component>
+                        </template>
+
+                        <Icon v-else :name="isVertical ? 'arrow-down' : 'arrow-right'" size="12" />
                     </div>
                 </div>
             </div>
@@ -36,16 +50,13 @@ import Icon from '@/components/icon'
 
 const props = withDefaults(defineProps<SplitterProps>(), SPLITTER_DEFAULT_PROPS)
 
+const emit = defineEmits(['resize-start', 'resize', 'resize-end', 'collapse'])
+
 const ns = useNameSpace('splitter')
 
 type SplitterPanelType = InstanceType<typeof SplitterPanel>
 
 const panelRefs = ref<SplitterPanelType[]>([])
-
-type CollapsibleState = {
-    start: boolean
-    end: boolean
-}
 
 // collapsible icon 显示状态
 const showIconStart = (index: number): boolean => {
@@ -103,6 +114,8 @@ const handleCollapsibleStart = (index: number): void => {
 
     setPanelSizeState(index)
     setPanelSizeState(index + 1)
+
+    emit('collapse', currentIndex, 'start', getPanelSizeList())
 }
 
 const handleCollapsibleEnd = (index: number): void => {
@@ -120,6 +133,8 @@ const handleCollapsibleEnd = (index: number): void => {
 
     setPanelSizeState(index)
     setPanelSizeState(index + 1)
+
+    emit('collapse', currentIndex, 'end', getPanelSizeList())
 }
 
 const setPanelRef = (el: SplitterPanelType): void => {
@@ -336,6 +351,14 @@ const lastNoneIndex = (index: number): number => {
 
 // 获取上一个未隐藏的索引
 const prevNotNoneIndex = (index: number): number => {
+    if (index === 0) {
+        return 0
+    }
+
+    if (index >= panelElList.length) {
+        return panelElList.length
+    }
+
     let newIndex = 0
     for (let i = index - 1; i >= 0; i--) {
         if (getPanelElSize(i) > 0) {
@@ -426,6 +449,8 @@ const handleMouseDown = (e: MouseEvent, index: number) => {
     document.body.classList.add(isVertical.value ? 'cursor-ns-resize' : 'cursor-ew-resize')
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp)
+
+    emit('resize-start', currentIndex, getPanelSizeList())
 }
 
 // 鼠标抬起
@@ -435,15 +460,19 @@ const handleMouseUp = (e: MouseEvent) => {
     currentIsNone = false
     once = true
 
-    if (props.lazy) {
+    if (props.lazy && lazyChange) {
         move(lazyBarSize)
     }
+
+    lazyChange = false
 
     let currentSize: number = getPanelElSize(currentIndex)
     let nextSize: number = getPanelElSize(nextIndex)
 
     panelSizeList.value[currentIndex] = { currentSize, prevSize: currentSize }
     panelSizeList.value[nextIndex] = { currentSize: nextSize, prevSize: nextSize }
+
+    emit('resize-end', currentIndex, getPanelSizeList())
 
     document.body.classList.remove('no-select')
     document.body.classList.remove(isVertical.value ? 'cursor-ns-resize' : 'cursor-ew-resize')
@@ -492,7 +521,11 @@ const handleMouseMove = (e: MouseEvent) => {
     } else {
         move(_to)
     }
+
+    emit('resize', currentIndex, getPanelSizeList())
 }
+
+let lazyChange: boolean = false
 
 const lazyMove = (transform: number): void => {
 
@@ -515,6 +548,8 @@ const lazyMove = (transform: number): void => {
     }
 
     lazyBarRef.value!.style[isVertical.value ? 'top' : 'left'] = `${position}px`
+
+    lazyChange = true
 }
 
 
@@ -539,6 +574,9 @@ const nodes = computed(() => {
         return []
     })
 })
+
+console.log(nodes);
+
 
 const isVertical = computed(() => props.direction === SPLITTER_DIRECTION.vertical)
 

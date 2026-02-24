@@ -36,6 +36,7 @@ export default defineConfig({
                         { text: "Text 文本", link: "/components/text" },
                         { text: "Scrollbar", link: "/components/scrollbar" },
                         { text: "Space 间距", link: "/components/space" },
+                        { text: "Splitter 分隔面板", link: "/components/splitter" },
                     ],
                 },
                 {

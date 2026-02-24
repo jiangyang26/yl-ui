@@ -34,7 +34,7 @@
             <yl-splitter-panel collapsible size="300">
                 <div>Panel 2</div>
             </yl-splitter-panel>
-            <yl-splitter-panel>
+            <yl-splitter-panel collapsible>
                 <div>Panel 3</div>
             </yl-splitter-panel>
             <yl-splitter-panel collapsible>
