@@ -56,6 +56,10 @@ const spaceStyle = computed(() => {
         style.alignItems = props.alignment
     }
 
+    if (props.fill) {
+        style.width = '100%'
+    }
+
     if (props.size) {
         if (isNumeric(props.size)) {
             style.gap = `${props.size}px`

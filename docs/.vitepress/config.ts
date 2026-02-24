@@ -35,6 +35,7 @@ export default defineConfig({
                         { text: "Link 链接", link: "/components/link" },
                         { text: "Text 文本", link: "/components/text" },
                         { text: "Scrollbar", link: "/components/scrollbar" },
+                        { text: "Space 间距", link: "/components/space" },
                     ],
                 },
                 {

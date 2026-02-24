@@ -67,22 +67,22 @@ async function generateComponentDoc(componentName) {
     const imports =
         vueFiles.length > 0
             ? vueFiles
-                  .map((file) => {
-                      const caseName = file.replace(".vue", "");
-                      return `import ${caseName} from '../examples/${componentName}/${file}'`;
-                  })
-                  .join("\n")
+                .map((file) => {
+                    const caseName = file.replace(".vue", "");
+                    return `import ${caseName} from '../examples/${componentName}/${file}'`;
+                })
+                .join("\n")
             : "// 暂无示例文件";
 
     // 生成 ExampleViewer 使用
     const examples =
         vueFiles.length > 0
             ? vueFiles
-                  .map((file) => {
-                      const caseName = file.replace(".vue", "");
-                      return `<ExampleViewer name="${componentName}" case="${caseName}" />`;
-                  })
-                  .join("\n\n")
+                .map((file) => {
+                    const caseName = file.replace(".vue", "");
+                    return `<ExampleViewer name="${componentName}" case="${caseName}" />`;
+                })
+                .join("\n\n")
             : "<!-- 暂无示例 -->";
 
     // 生成 Markdown 内容
@@ -99,7 +99,7 @@ const events = ref([
 ])
 
 const slots = ref([
-    { name: '', description: '' }
+    { name: '', description: '', subTag: '' }
 ])
 
 const exposes = ref([
@@ -120,7 +120,7 @@ ${examples}
 <ApiTable :data="events" type="events" />
 
 ### Slots
-<ApiTable :data="slots"  type="slots" subTag="" />
+<ApiTable :data="slots"  type="slots" />
 
 ### Exposes
 <ApiTable :data="exposes" type="exposes" />

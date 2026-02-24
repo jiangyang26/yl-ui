@@ -62,7 +62,7 @@ reach-bottom 是在滚动条到达底部时触发的。 它可以用作无限滚
 <ApiTable :data="events" type="events" />
 
 ### Slots
-<ApiTable :data="slots"  type="slots" subTag="" />
+<ApiTable :data="slots"  type="slots" />
 
 ### Exposes
 <ApiTable :data="exposes" type="exposes" />
